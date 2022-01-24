@@ -52,10 +52,10 @@ contract ParameterRegister {
             = _data;
 
         recordingNonce
-                [tx.origin]                         // tx origin
-                [callNonce[tx.origin]]              // call nonce
-                [_contract]                         // contract
-                ++;
+            [tx.origin]                             // tx origin
+            [callNonce[tx.origin]]                  // call nonce
+            [_contract]                             // contract
+            ++;
     }
 
     /// @notice as a contract, consume a pre-computed parameter,
