@@ -48,7 +48,7 @@ This standard can be used for every case where verification of correctness of co
 
 ## Motivation
 
-Off-chain computation checked on-chain has become a common pattern is Dapps, virtually enabling usage of large data sets or complex computations in smart contracts within their limited resources. This is usually achieved through a script in a front-end app generating the correct parameters required by a contract call. This pattern is by nature non-composable, any protocol that needs to be integrated by other protocols must resolve to implement those costly operations on chain.  
+Off-chain computation checked on-chain has become a common pattern in Dapps, virtually enabling usage of large data sets or complex computations in smart contracts within their limited resources. This is usually achieved through a script in a front-end app generating the correct parameters required by a contract call. This pattern is by nature non-composable, any protocol that needs to be integrated by other protocols must resolve to implement those costly operations on chain.  
 The proposed new standards would greatly broaden the possibilities of smart-contract developers, especially in the interactions accross protocols. L2-scaling alone can't provide this kind of application-specific optimisations.
 
 ## Specification
