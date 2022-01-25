@@ -248,22 +248,22 @@ This standard requires the signers/wallets to implement logic specific for it, a
 
 In the contract Example, we want to call the function needsOffchainComputedParameter().
 
-**Step 1.)**
-A gas estimation is required on a tx calling needsOffchainComputedParameter().
+**Step 1.)**  
+A gas estimation is requested on a tx calling needsOffchainComputedParameter().
 
-**Step 2.)**
+**Step 2.)**  
 getParameter() from the Parameter Register is called. It fetches data from the parameter register, as the parameter register received no data yet, it returns an empty variable. A check is performed, as the data is constated to be empty, a revert is triggered. The revert gives an error message which has a standardised format. It is prefixed by `eip-xxxx;` to signal to the signing software that this error message contains instructions to compute the requested parameters. When abi-decoding the rest of the data, the signer will find the address of the contract that reverted, as well as a method selector. 
 
-**Step 3.)**
+**Step 3.)**  
 The signer now has to request the bytecode of the contract address returned. As the method corresponding to the selector is pure, it can be called in a local EVM (that disabled block gas limit) without needing to fork the chain. Arguments for this function are found in the error message, after the selector. Returned values (the offchain computed ones) are stored for the next step.
 
-**Step 4.)**
+**Step 4.)**  
 The gas estimation is called again, in a transaction that now includes a call to the recordParameters() function (thanks to either EIP-3074 or EIP-2803), providing the saved data stored from step 3.
 
-**Step 5.)**
+**Step 5.)**  
 As getParameter() can be called multiple times in one tx, especially in cross-protocol scenarios, the gas estimation may return a standardised error message again. We loop in steps 3 and 4 as long as needed, each time appending the new offchain parameters that we computed at the end of the array we provide to the recordParameters(). 
 
-**Step 6.)**
+**Step 6.)**  
 At some point, we will have provided all the offchain parameters needed and the gas estimation will give an error-free result. The transaction preparation is complete, we can sign and send.
 
 ### Optional getParameter() implementations
@@ -320,9 +320,9 @@ All design choices have been made to minimize as much as possible changes needed
 
 ### Reference implementation of the Parameter Register
 
-We store the data we use a mapping nested 4 times. This permits to make sure that a contract can only see the data that was meant for him, and hides them any other data which can be used to deduce the context of the transaction and derive potentially composability-breaking conditions from it.
+To store the data we use a mapping nested 4 times. This permits to make sure that a contract can only see the data that was meant for it, and hides any other data which can be used to deduce the context of the transaction and derive potentially composability-breaking conditions from it.
 The data is accessed via the consumeParameter() method, which allows the same data to be accessed only once. This is because the data must be updated for each call of consumeParameter() as it corresponds to another context. This is automatic and the contract can't ask for the data of a specific nonce to minimize confusion and maximize abstraction.
-Each time an address calls recordParameters() it increments its `callNonce`, as only the latest nonce can be requested, this effectively overwrites previously stored data (from an application point of vue, not from the chain point of vue). This avoids confusion between calls, and is useful to overwrite an eventual mistake and/or data stored for a call that is no longer planned.
+Each time an address calls recordParameters() it increments its `callNonce`, as only the latest nonce can be requested, this effectively overwrites previously stored data (from an application standpoint, not from the chain standpoint). This avoids confusion between calls, and is useful to overwrite an eventual mistake and/or data stored for a call that is no longer planned.
 
 ### Reference implementation to be inherited from
 
