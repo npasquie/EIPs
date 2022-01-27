@@ -3,12 +3,12 @@ eip: XXXX
 title: Offchain Computation Standard
 description: Standard to request & access offchain computed parameters while preserving composability
 author: Nicolas Pasquier (@npasquie)
-discussions-to: todo
+discussions-to: https://ethereum-magicians.org/t/offchain-computation-standard/8126
 status: Draft
 type: Standards Track
 category: ERC
 created: 2022-01-24
-requires: 165
+requires: 165, 3074
 ---
 
 # Offchain Computation Standard
