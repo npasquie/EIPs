@@ -15,6 +15,7 @@ requires: 165
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Offchain Computation Standard](#offchain-computation-standard)
+    - [Reader advisory](#reader-advisory)
   - [Simple Summary](#simple-summary)
   - [Abstract](#abstract)
   - [Motivation](#motivation)
@@ -33,6 +34,9 @@ requires: 165
     - [Coding implications](#coding-implications)
     - [Examples of scalabity gains in 3 use-cases](#examples-of-scalabity-gains-in-3-use-cases)
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+### Reader advisory
+No PR yet to the EIP repo. Modifications to come before PR : usage of EIP-3668 inspired error, more specifications for clients, rewording.
 
 ## Simple Summary
 
